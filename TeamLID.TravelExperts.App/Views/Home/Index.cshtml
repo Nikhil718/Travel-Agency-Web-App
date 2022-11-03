@@ -1,0 +1,69 @@
+﻿
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container container-greetings">
+    <h1 class="landing-greetings h1-responsive">
+        The new way to plan your next trip!
+    </h1>
+
+    <p class='lead text-center'>The world is at your fingertips...</p>
+</div>
+
+<!-- Begin Main -->
+<main >
+    <div class="container"  >
+        <div class="main">
+
+            <h4 class="packages-display h4-responsive"> Package Deals</h4>
+
+            <!-- <hr> -->
+            <br>
+            <div class="card-deck">
+                <div class="card package wow slideInLeft" data-wow-delay="500ms">
+                    <img src="~/images/Goa.jpg" class="card-img-top" alt="caribbean">
+                    <div class="card-body">
+                        <h4 class="card-title h4-responsive"> <strong> Goa New Year</strong></h4>
+                        <p class="card-text">Celebrate your new year in Goa</p>
+                    </div>
+                    <blockquote class="blockquote mb-0 card-body">
+                        <footer class="">
+                            <p class='lead'> 5200 Rs </p>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card package wow slideInUp" data-wow-delay="0.1s">
+                    <img src="~/images/ladak.jpg" class="card-img-top" alt="polynesian">
+                    <div class="card-body">
+                        <h4 class="card-title h4-responsive"> <strong> Bike Ride</strong></h4>
+                        <p class="card-text">8 Days All Inclusive.</p>
+                    </div>
+                    <blockquote class="blockquote mb-0 card-body">
+                        <footer class="">
+                            <p class='lead'> 3310 Rs </p>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card package wow slideInRight" data-wow-delay="0.2s">
+                    <img src="~/images/Kedarnath.jpg" class="card-img-top" alt="asian">
+                    <div class="card-body">
+                        <h4 class="card-title h4-responsive"> <strong>Devotion!! </strong></h4>
+                        <p class="card-text">Complete Tour.</p>
+                    </div>
+
+                    <blockquote class="blockquote mb-0 card-body">
+                        <footer class="">
+                            <p class='lead'> 5000 Rs </p>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+            <br>
+            <div class="wow fadeInUp" data-wow-delay="250ms">
+                <a asp-controller="Packages" asp-action="Index"><button class='btn btn-primary btn-block float-center more'>More Package</button></a>
+            </div>
+        </div>
+    </div>
+</main>

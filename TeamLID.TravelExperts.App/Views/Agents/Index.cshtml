@@ -1,0 +1,100 @@
+﻿
+@model IEnumerable<TeamLID.TravelExperts.Repository.Domain.Agents>
+
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+
+<header class="container-header">
+
+
+    <div class="jumbotron jumbotron-fluid jumbotron-contact">
+        <div class="container">
+            <h1 class="display-4 contact-greetings h1-responsive">Contact Us</h1>
+            <hr class="my-4">
+        </div>
+    </div>
+
+</header>
+
+<main>
+    <!-- AGENCY -->
+    <div class="container">
+
+        <div class="contact-main">
+
+            <div class="agent-box">
+                <br />
+                <br />
+                <h2 class="agent-contacts">Visit Our Office</h2>
+                <div class="main">
+                    <div class="card-deck">
+                        <div>
+                            <div class="card border-success mb-3" style="max-width: 20rem;">
+                                <div class="card-header bg-transparent border-success"><strong>Bangalore</strong></div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Address</h5>
+                                    <p class="card-text">
+                                        NO 650,17th Main,6th Block Koramangla,Bengaluru, Karnataka 560024.                                        
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-transparent border-success">Agency Phone: +91 9912515445</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card border-success mb-3" style="max-width: 20rem;">
+                                <div class="card-header bg-transparent border-success"><strong>Mumbai</strong></div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Address</h5>
+                                    <p class="card-text">
+                                        Citi Mall, Shop No 49, Ground Floor, New Link Rd, Andheri West, Mumbai, Maharashtra 400053                                       .
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-transparent border-success">Agency Phone: +91 6367148525</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="card border-success mb-3" style="max-width: 20rem;">
+                                <div class="card-header bg-transparent border-success"><strong>Delhi</strong></div>
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Address</h5>
+                                    <p class="card-text">
+                                        C-79/144, Vallabhacharya Marg, Type 1, Aram Bagh, Paharganj, New Delhi, Delhi 110055                                    .
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-transparent border-success">Agency Phone: +91 8795215245</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <h5 class="description">You can also have a chat with any of our agents to tailor your travel experience.</h5>
+                <hr />
+
+                <h4 class="packages-display h3-responsive">Partnered Agents</h4>
+                <div class="card-deck">
+                    @foreach (var item in Model)
+                    {
+                        <div class="card-body">
+                            <h4 class="card-title h4-responsive"> <strong>@Html.DisplayFor(modelItem => item.AgtFirstName) @Html.DisplayFor(modelItem => item.AgtMiddleInitial) @Html.DisplayFor(modelItem => item.AgtLastName)</strong></h4>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.AgtBusPhone)</p>
+                            <p><a href='mailto:@Html.DisplayFor(modelItem => item.AgtEmail)'>@Html.DisplayFor(modelItem => item.AgtEmail)</a></p>
+                        </div>
+                        <blockquote class="blockquote mb-0 card-body"></blockquote>
+                    }
+                   
+                </div>
+                <div>
+                    <button  class="btn btn-outline-success">We are hiring technical team</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</main>

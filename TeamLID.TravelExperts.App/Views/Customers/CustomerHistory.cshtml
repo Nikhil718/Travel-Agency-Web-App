@@ -1,0 +1,155 @@
+﻿
+
+@model IEnumerable<TeamLID.TravelExperts.App.Models.BookingsModel>
+
+@{ ViewData["Title"] = "Booking History"; }
+
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid jumbotron-customer">
+        <div class="container"  style="text-align:center">
+            <h1 class="display-4 register-greetings h1-responsive">Booking History</h1>
+            <hr class="my-4">
+            <h3 @*class="lead register-heading"*@>Your Bookings</h3>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<main>
+    <div class="container">
+        @if (TempData["AlertMessage"] != null)
+        {
+    <div class="alert alert-success">
+        <strong>Success!!</strong> @TempData["AlertMessage"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>}
+        <div class="register-main">
+
+            <div class="register-box">
+                <div class="table-responsive-lg">
+                    @if (Model.Count() == 0)
+                    {
+
+        <h4 class="text-center mt-120"> You have no bookings</h4>
+                        <div style="text-align:center"><a asp-controller="Packages" asp-action="Index"><button class="btn btn-outline-success">Book Now</button></a></div> }
+                    else
+                    {
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TravelerCount)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.CustomerId)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.TripTypeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PackageId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TravelerCount)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripTypeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PackageId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |*@
+                        <a asp-action="BookingDetail" asp-route-id="@item.BookingId"><button class="btn btn-outline-primary"> View Booking </button></a>
+                        @*|
+                        <a asp-action="Delete" asp-route-id="@item.PackageId">Delete</a>*@
+                    </td>
+                </tr>
+            } -->
+
+                @foreach (var item in Model)
+                {
+    <tr class="text-center">
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TravelerCount)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.TripTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PackageId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @*<a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |*@
+            <a asp-action="BookingDetail" asp-route-id="@item.BookingId"><button class="btn btn-outline-primary"> View Detail </button></a>
+            @*|
+            <a asp-action="Delete" asp-route-id="@item.PackageId">Delete</a>*@
+        </td>
+
+    </tr>}
+            </tbody>
+            <span class="mr-200 text-right">
+                <p> <strong>Total Owing</strong>: Rs @Model.Sum(p => p.Price).ToString("c0")</p>
+            </span>
+
+            <div style="text-align:end"><a asp-controller="Bookings" asp-action="Payment"><button type="button" class="btn btn-success">Pay Now</button></a> </div>
+
+
+        </table>}
+
+                    <br />
+                    <br />
+
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

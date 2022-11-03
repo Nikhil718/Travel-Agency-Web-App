@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeamLID.TravelExperts.Repository\TeamLID.TravelExperts.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\comp2.jpg" />
+    <Content Remove="wwwroot\images\comp6.jpg" />
+    <Content Remove="wwwroot\images\comp5.jpg" />
+    <Content Remove="wwwroot\images\comp4.jpg" />
+    <Content Remove="wwwroot\images\carib-new.jpeg" />
+    <Content Remove="wwwroot\images\Polyn.jpeg" />
+    <Content Remove="wwwroot\images\Asian.jpeg" />
+    <Content Remove="wwwroot\images\logo3.png" />
+    <Content Remove="wwwroot\images\Travel3.jpg" />
+    <Content Remove="wwwroot\images\Travel2.jpg" />
+    <Content Remove="wwwroot\images\Travel1.jpg" />
+    <Content Remove="wwwroot\images\European.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\Scripts\CustomJS.js" />
+  </ItemGroup>
+  <!-- <ItemGroup>
+    <Compile Remove="Controllers\CustomersController.cs" />
+  </ItemGroup> -->
+  <!-- <ItemGroup>
+    <Content Include="wwwroot\images\profile.jpg" />
+  </ItemGroup> -->
+</Project>

@@ -1,0 +1,84 @@
+﻿
+
+@model LoginViewModel
+
+@*@section Styles {
+    <link href="@Url.Content("~/css/signin.css")" rel="stylesheet" type="text/css" />
+}*@
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div>
+    <div class="container" style=" background: linear-gradient(20deg, white, blue);">
+        <h1 class="display-4 register-greetings h1-responsive"> Login</h1>
+        <hr class="my-4">
+       
+    </div>
+</div>
+
+<main  >
+    <div class="container">
+
+        <div class="register-main card">
+
+            <div class="register-box" style="background-image: url(https://media.istockphoto.com/photos/long-road-empty-road-blue-sky-on-the-way-beautiful-view-and-landscape-picture-id1334343041?k=20&m=1334343041&s=612x612&w=0&h=gjtYOyHqNhgmag9OJBO7Wk_b097qs7G6LU3pjJPoQU4=); background-repeat: no-repeat; background-size: 1120px ">
+                <p style="font-size:25px" class="lead register-heading">Welcome to <span style="color:blue">Plan</span> Your Trip, Login to continue</p>
+                <div class="row">
+                    <div class='col-md-8 offset-md-2'>
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+                        <form asp-action="Login" asp-controller="Customers" class="form-signin text-center">
+                            @if (ViewBag.msg != null)
+                            {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        @ViewBag.msg
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>}
+
+                            @if (ViewBag.success != null)
+                            {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @ViewBag.success
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> } @*<h1 class="h3 mb-3 font-weight-normal">Please log in</h1>*@
+
+                        <div class="form-group">
+
+                            <label for="inputEmail" class="sr-only">Username</label>
+                            <input type="text" asp-for="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" asp-for="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                        </div>
+                            <div class="checkbox mb-3">
+                                @*<label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>*@
+                            </div>
+
+                            <div>
+                                <p>Don't have an account? Kindly <a asp-controller="Customers" asp-action="Register" style="color:green;">Register</a></p>
+                            </div>
+                            <button class="btn btn btn-outline-primary btn-block" type="submit">User Log In</button>
+
+                        </form>
+                        <a asp-controller="Packages" asp-action="Create"><button class="btn btn btn-outline-primary btn-block" type="submit">Admin Log In</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

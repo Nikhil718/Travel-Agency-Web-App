@@ -1,0 +1,367 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@using TeamLID.TravelExperts.Repository.Domain
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Plan Your Trip</title>
+
+    @*<link href="https://fonts.googleapis.com/css?family=Marck+Script|Aclonica|Berkshire+Swash|Metrophobic" rel="stylesheet">*@
+    <environment include="Development">
+        @*<link href="https://fonts.googleapis.com/css?family=Marck+Script|Aclonica|Berkshire+Swash|Metrophobic" rel="stylesheet">*@
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        @RenderSection("Styles", false)
+    </environment>
+    <environment exclude="Development">
+        <link href="https://fonts.googleapis.com/css?family=Marck+Script|Aclonica|Berkshire+Swash|Metrophobic" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+        body {
+            background: #F8FAF7 !important;
+        }
+
+        .landing-greetings {
+            /* font-family: 'Marck Script', cursive; */
+            font-family: 'Aclonica', sans-serif;
+            text-align: center;
+            font-size: 45px;
+        }
+
+        .packages-display {
+            /* font-family: 'Marck Script', cursive; */
+            font-family: 'Aclonica', sans-serif;
+            text-align: center;
+            font-size: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-greetings, .register-greetings {
+            font-family: 'Aclonica', sans-serif;
+            /* text-align: center; */
+            font-size: 45px;
+        }
+
+        .cities {
+            margin-top: 20px;
+        }
+
+        .destinations {
+            font-family: 'Aclonica', sans-serif;
+        }
+
+        /* .landing-carousel{ */
+        /* text-align: center; */
+        /* height: 100px;  */
+        /* } */
+
+        /*.carousel-inner > .item > img {
+            width: 1200px;
+            height: 500px;
+        }*/
+
+
+        .comp-contacts > ul, .register-heading, .btn, input[placeholder], .footer, p {
+            list-style: none;
+            font-family: 'Metrophobic', sans-serif;
+        }
+
+        .agent-contacts {
+            font-family: 'Aclonica', sans-serif;
+            text-align: center;
+            font-size: 35px;
+            margin-top: 20px;
+        }
+
+        .agent-box, .register-box {
+            margin-bottom: 40px;
+            background: #fff;
+            border: #D9E5D6 solid 1px;
+            border-radius: 10px;
+            padding: 30px;
+            min-height: 800px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+
+        .profile-box {
+            margin-bottom: 40px;
+            background: #fff;
+            border: #D9E5D6 solid 1px;
+            border-radius: 10px;
+            padding: 30px;
+            min-height: 400px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+
+        .agent > .card {
+            margin-top: 40px;
+            border: #F3EAC5 solid 1px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.02), 0 10px 10px rgba(0, 0, 0, 0.06);
+        }
+
+            .agent > .card:hover, .package:hover {
+                box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+                transition: all 0.8s ease-in-out;
+            }
+
+        .package {
+            border: #fff solid 1px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.02), 0 10px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .landing-para {
+            text-align: center;
+        }
+
+        .card-title, .landing-para {
+            font-family: 'Berkshire Swash', cursive;
+        }
+
+        .list-group-item, .description {
+            font-family: 'Metrophobic', sans-serif;
+        }
+
+        .description {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .focus-feedback {
+            display: none;
+        }
+
+        .focus-display {
+            color: #EDAE49;
+            font-size: 13px;
+            display: block;
+        }
+
+        .validation {
+            display: none;
+        }
+
+        .validation-error {
+            color: red;
+            display: block;
+            font-size: 13px;
+        }
+
+        .nav-hidden {
+            margin-left: 5px;
+            font-size: 18px;
+        }
+
+        .nav-item {
+            margin-left: 15px;
+        }
+
+            .nav-item:hover {
+                box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+                color: white;
+                /* background: #5D605F; */
+            }
+
+        /* .container-header {
+            position: relative;
+            padding: 0;
+        } */
+
+        /*.jumbotron-register {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShVKWgscbK0z6ll_w0w_jkOOAYcMZsOGuAjA&usqp=CAU');
+            background-size: cover;
+            color: black;*/
+            /* position: relative; */
+            /*min-height: 400px;
+        }*/
+
+        .jumbotron-contact {
+            background-image: url('http://agoodmindcounseling.com/wp-content/uploads/2022/08/Contact-Information-Header.jpeg');
+            background-size: cover;
+            color: white;
+            min-height: 400px;
+        }
+
+        /*.jumbotron-profile {
+            background-image: url('https://images.pexels.com/photos/838413/pexels-photo-838413.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+            background-size: cover;
+            color: black;
+            min-height: 400px;
+        }*/
+
+        .jumbotron-gallery {
+            background-image: url('https://images.pexels.com/photos/20967/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+            background-size: cover;
+            color: white;
+            min-height: 400px;
+        }
+
+        .jumbotron-landing {
+            background-image: url('https://images.pexels.com/photos/372098/pexels-photo-372098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=700&w=1260');
+            min-height: 780px;
+            color: white;
+            background-size: cover;
+        }
+
+        .jumbotron-packages {
+            background-image: url('https://www.holytreetravel.com/india/IMAGE/First%20Timer.jpg');
+            background-size: cover;
+            color: white;
+            min-height: 400px;
+        }
+
+        .jumbotron-login {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5T_46bDnRlyNcC3VexJAXY-YOW9zwESM6yg&usqp=CAU');
+            background-size: cover;
+            color: white;
+            min-height: 450px;
+        }
+
+        .jumbotron-agent {
+            background-image: url('https://images.pexels.com/photos/684385/pexels-photo-684385.jpeg?cs=srgb&dl=adult-agent-approval-684385.jpg&fm=jpg');
+            background-size: cover;
+            color: white;
+            min-height: 400px;
+        }
+
+        .jumbotron-customer {
+            background-image: url('https://image.shutterstock.com/image-photo/tropical-paradise-beach-white-sand-260nw-674128501.jpg');
+            background-size: cover;
+            color: white;
+            min-height: 400px;
+        }
+
+        .index-greeting {
+            font-family: 'Righteous', cursive;
+        }
+
+        .morning {
+            background: #A3D3E1;
+            padding: 10px;
+            max-width: 200px;
+            color: #F3F9F9;
+            font-family: 'Metrophobic', sans-serif;
+            border-radius: 15px;
+        }
+
+        .parallax {
+            /* Set a specific height */
+            height: 426px;
+            /* Create the parallax scrolling effect */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background: linear-gradient(#4ca1af, #c4e0e5);">
+            <div class="container" >
+                <h2><span style="color:darkblue">Plan</span> Your Trip</h2>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                        <li class="nav-item">
+                            @*asp-area=""*@
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Packages" asp-action="Index">Packages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Agents" asp-action="Index">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            @*asp-area="" asp-controller="Customers" asp-action="Index"*@
+                            <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" role="button">Account</a>
+                            <div class="dropdown-menu">
+                                <!-- If user session doesn't exist, show login & register, otherwise show logout & history -->
+                                @{ if (Context.Session.GetObject<Customers>("login") == null)
+                                    {
+                        <a class="dropdown-item" asp-controller="Customers" asp-action="Register">Register</a>
+                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" asp-controller="Customers" asp-action="Login">Login</a> }
+                                    else
+                                    {
+                                        <a class="dropdown-item" asp-controller="Customers" asp-action="CustomerHistory">Booking History</a>
+                                                        <a class="dropdown-item" asp-controller="Customers" asp-action="Profile">My Profile</a>
+                                                                        <div class="dropdown-divider"></div>
+                                                                                        <a class="dropdown-item" asp-controller="Customers" asp-action="Logout">Logout</a> } }
+                            </div>
+
+                    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid" style="background: linear-gradient( #c4e0e5,#4ca1af);" >
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @{var loginCust = Context.Session.GetObject<Customers>("login");}
+            @if (loginCust != null)
+            {var greetMsg = "Hello, " + loginCust.CustFirstName;
+                            <h4 style="font-family:'Segoe UI Variable Display'" class=" text-center">
+                                @greetMsg
+                            </h4>            }
+
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; NIKHIL NAIK 2022 - Plan Your Trip
+            @*<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>*@
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"></script>
+
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+    <script>new WOW().init();</script>
+    <script src="~/Scripts/CustomJS.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
